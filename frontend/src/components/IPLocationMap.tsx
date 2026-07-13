@@ -14,11 +14,13 @@ interface IPLocationMapProps {
 function IPLocationMap({
   ipInfo,
 }: IPLocationMapProps) {
-  const hasCoordinates =
-    ipInfo.latitude !== null &&
-    ipInfo.longitude !== null;
+  const latitude = ipInfo.latitude;
+  const longitude = ipInfo.longitude;
 
-  if (!hasCoordinates) {
+  if (
+    latitude === null ||
+    longitude === null
+  ) {
     return (
       <article className="rounded-3xl border border-white/10 bg-slate-900/70 p-6">
         <p className="text-xs font-semibold uppercase tracking-wider text-cyan-400">
@@ -39,8 +41,8 @@ function IPLocationMap({
   }
 
   const position: [number, number] = [
-    ipInfo.latitude,
-    ipInfo.longitude,
+    latitude,
+    longitude,
   ];
 
   return (
