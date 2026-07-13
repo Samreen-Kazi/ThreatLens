@@ -19,6 +19,19 @@ DATABASE_URL = os.getenv(
 )
 
 
+# Neon usually provides a URL beginning with:
+# postgresql://
+#
+# SQLAlchemy should use the installed Psycopg 3 driver:
+# postgresql+psycopg://
+if DATABASE_URL.startswith("postgresql://"):
+    DATABASE_URL = DATABASE_URL.replace(
+        "postgresql://",
+        "postgresql+psycopg://",
+        1,
+    )
+
+
 connect_args = {}
 
 if DATABASE_URL.startswith("sqlite"):
